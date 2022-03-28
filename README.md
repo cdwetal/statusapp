@@ -1,0 +1,2 @@
+# StatusApp
+This is StatusApp. The project contains to application. The `statusapp-server` project is the backend application, and the `statusapp-client` project is the frontend application. For more information about each project, please navigate to their directories.

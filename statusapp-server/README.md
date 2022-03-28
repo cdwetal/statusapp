@@ -7,3 +7,5 @@ npm install
 npm run start:dev
 ```
 The server app will then run at http://localhost:3000.
+## Technology Summary
+The server application is a NestJS application. It uses Socket.io to send and receive data in real-time from the client to the server. It also has a CRUD REST API for all database objects. The application uses a local SQLite database for storage (no setup required). This project is written in TypeScript.
