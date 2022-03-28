@@ -113,7 +113,6 @@ export const appReducer = (state, action) => {
         }
     }
 
-    // This will repair broken path
     if (newState.activeRoom && !newState.rooms.find((room) => room.id === newState.activeRoom.id)) {
         newState.spinners.isActiveRoomLoading = true;
         newState.socket.emit("leaveRoom", { id: newState.activeRoom.id });

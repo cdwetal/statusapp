@@ -13,23 +13,24 @@ import { UserService } from './user/user.service';
 
 @WebSocketGateway({ cors: true })
 export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
+    @WebSocketServer() wss: Server;
+
     constructor(
         private userService: UserService, 
         private statusService: StatusService, 
         private roomService: RoomService,
         private favoriteService: FavoriteService
-    ) {}
-    
-    @WebSocketServer() wss: Server;
+    ) {}    
 
     async handleConnection(client: Socket, ...args: any[]) {
         let user = await this.userService.findOne({ where: {id: client.handshake.query.id.toString() }});
         user.socketId = client.id;
-        this.userService.update(user);
-
-        await client.join(`ROOM:${(await this.roomService.findOne({ where: { default: true }})).id}`);
+        this.userService.update(user);        
 
         let rooms = await this.getRooms();
+        await client.join(`ROOM:${rooms.find((room) => room.default).id}`);
+        rooms.find((room) => room.default).users.push(user);
+        
         client.emit(
             'userConnected', 
             { 

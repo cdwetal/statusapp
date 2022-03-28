@@ -1,14 +1,26 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CustomRepositoryCannotInheritRepositoryError, DeleteResult, FindManyOptions, FindOneOptions, InsertResult, Repository, UpdateResult } from 'typeorm';
 import { Room } from './room.entity';
 
 @Injectable()
-export class RoomService {
+export class RoomService implements OnApplicationBootstrap {
     constructor(
         @InjectRepository(Room)
         private roomRepository: Repository<Room>,
     ) { }
+
+    async onApplicationBootstrap() {
+        if (!(await this.findOne({ where: { default: true }}))) {
+            let room: Room = new Room();
+            room = new Room();
+            room.name = 'Home';
+            room.path = '/';
+            room.sortOrder = 0;
+            room.default = true;
+            await this.create(room);
+        }
+    }
 
     findAll(): Promise<Room[]> {
         return this.roomRepository.find();

@@ -101,7 +101,7 @@ const UserCard = ({ user }) => {
                             null
                         }
                         {
-                            user.status !== null
+                            user.status
                             ?
                                 <IconButton 
                                     sx={{
@@ -173,17 +173,16 @@ const UserCard = ({ user }) => {
                         />
                         :
                         <React.Fragment>
-                            
                             <Typography 
                                 variant="body2" 
                                 color="text.secondary">
-                                {user.status !== null ? user.status.status : (appContext.state.user.id === user.id ? "You have not created a status yet!" : "This user has not set their status yet.") }
+                                {user.status ? user.status.status : (appContext.state.user.id === user.id ? "You have not created a status yet!" : "This user has not set their status yet.") }
                             </Typography>
                             <Typography
                                 fontSize="0.65rem"
                                 variant="caption"
                                 color="text.secondary">
-                                {user.status !== null ? timeSince(new Date(user.status.timestamp)) : "" }
+                                {user.status ? timeSince(new Date(user.status.timestamp)) : "" }
                             </Typography>
                         </React.Fragment>
                     }
