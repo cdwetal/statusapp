@@ -1,0 +1,7 @@
+{
+    "type": "better-sqlite3",
+    "database": "./data/db.sqlite",
+    "prepareDatabase": true,
+    "entities": ["dist/**/*.entity{.ts,.js}"],
+    "synchronize": true
+}
