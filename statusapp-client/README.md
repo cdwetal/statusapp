@@ -1,7 +1,7 @@
 # StatusApp Client
 This is the StatusUp client. This consists of all of the frontend functionality for StatusApp. 
 ## Installation
-To install and run StatusApp client please issue the following commands on a computer that has Node.js installed.
+Please ensure that the `statusapp-server` application is running on port 3000 before running the client application. To install and run StatusApp client please issue the following commands on a computer that has Node.js installed.
 ```
 npm install
 npm run start
